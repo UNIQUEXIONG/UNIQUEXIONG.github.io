@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" >
+
+<title>Gson序列化与反序列化 | 熊熊&#39;s blog</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://uniquexiong.github.io/favicon.ico?v=1667208540424">
+<link rel="stylesheet" href="https://uniquexiong.github.io/styles/main.css">
+
+
+  
+    <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css" />
+  
+
+  
+
+
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+
+
+    <meta name="description" content="
+首先添加依赖
+
+
+implementation ‘com.google.code.gson:gson:2.8.5’
+
+
+最新版本在这个网址上找 https://github.com/google/gson
+两种序列化方式
+
+fromJso..." />
+    <meta name="keywords" content="技术,android" />
+  </head>
+  <body>
+    <div id="app" class="main">
+
+      <div class="sidebar" :class="{ 'full-height': menuVisible }">
+  <div class="top-container" data-aos="fade-right">
+    <div class="top-header-container">
+      <a class="site-title-container" href="https://uniquexiong.github.io">
+        <img src="https://uniquexiong.github.io/images/avatar.png?v=1667208540424" class="site-logo">
+        <h1 class="site-title">熊熊&#39;s blog</h1>
+      </a>
+      <div class="menu-btn" @click="menuVisible = !menuVisible">
+        <div class="line"></div>
+      </div>
+    </div>
+    <div>
+      
+        
+          <a href="/" class="site-nav">
+            首页
+          </a>
+        
+      
+        
+          <a href="/archives" class="site-nav">
+            归档
+          </a>
+        
+      
+        
+          <a href="/tags" class="site-nav">
+            标签
+          </a>
+        
+      
+        
+          <a href="/post/about" class="site-nav">
+            关于
+          </a>
+        
+      
+    </div>
+  </div>
+  <div class="bottom-container" data-aos="flip-up" data-aos-offset="0">
+    <div class="social-container">
+      
+        
+          <a class="social-link" href="https://github.com/UNIQUEXIONG" target="_blank">
+            <i class="fab fa-github"></i>
+          </a>
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+    <div class="site-description">
+      熊熊的博客
+    </div>
+    <div class="site-footer">
+      Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://uniquexiong.github.io/atom.xml" target="_blank">RSS</a>
+    </div>
+  </div>
+</div>
+
+
+      <div class="main-container">
+        <div class="content-container" data-aos="fade-up">
+          <div class="post-detail">
+            <h2 class="post-title">Gson序列化与反序列化</h2>
+            <div class="post-date">2022-10-09</div>
+            
+            <div class="post-content" v-pre>
+              <ul>
+<li>首先添加依赖</li>
+</ul>
+<blockquote>
+<p>implementation ‘com.google.code.gson:gson:2.8.5’</p>
+</blockquote>
+<ul>
+<li>最新版本在这个网址上找 <a href="https://github.com/google/gson">https://github.com/google/gson</a></li>
+<li>两种序列化方式</li>
+</ul>
+<pre><code>fromJson()：实现反序列化
+toJson()： 实现序列化
+</code></pre>
+<h2 id="例子">例子</h2>
+<ol>
+<li>基本数据类型的反序列化</li>
+</ol>
+<pre><code>        Gson gson = new Gson();
+        int     a = gson.fromJson(&quot;1&quot;, int.class);
+        double  b = gson.fromJson(&quot;0.123&quot;, double.class);
+        boolean c = gson.fromJson(&quot;true&quot;, boolean.class);
+        String  d = gson.fromJson(&quot;String&quot;, String.class);
+</code></pre>
+<ol start="2">
+<li>基本数据类型的序列化</li>
+</ol>
+<pre><code>		Gson gson = new Gson();
+        String a = gson.toJson(100);
+        String b = gson.toJson(0.2334);
+        String c = gson.toJson(false);
+        String d = gson.toJson(&quot;abcdef&quot;);
+</code></pre>
+<ol start="3">
+<li>Array的反序列化</li>
+</ol>
+<pre><code>        String arayJson = &quot;['Android', 'Ios', 'Java', 'PHP']&quot;;
+        Gson gson = new Gson();
+        String[] nameArray = gson.fromJson(arayJson, String[].class);
+        Log.d(&quot;arrayJson&quot;, &quot;onCreateView: &quot; + nameArray);
+</code></pre>
+<ol start="4">
+<li>Array的序列化</li>
+</ol>
+<pre><code>		ArrayList&lt;String&gt; nameArray = new ArrayList&lt;&gt;();
+        nameArray.add(&quot;Android&quot;);
+        nameArray.add(&quot;Ios&quot;);
+        nameArray.add(&quot;Java&quot;);
+        nameArray.add(&quot;PHP&quot;);
+        Gson gson = new Gson();
+        String gsonString = gson.toJson(nameArray);
+</code></pre>
+<ol start="5">
+<li>List/Map的反序列化</li>
+</ol>
+<pre><code>		String listString = &quot;[{'userId' : '1',  'userName':'怕瓦落地'}, {'userId':'2','userName':'安娜'}]&quot;;
+        Gson gson = new Gson();
+        Type listType = new TypeToken&lt;ArrayList&lt;Map&lt;String,String&gt;&gt;&gt;(){}.getType();
+        List&lt;Map&lt;String, String&gt;&gt; list = gson.fromJson(listString, listType);
+</code></pre>
+
+            </div>
+            
+              <div class="tag-container">
+                
+                  <a href="https://uniquexiong.github.io/tag/StzcOYYcV/" class="tag">
+                    技术
+                  </a>
+                
+                  <a href="https://uniquexiong.github.io/tag/GMlxh_gtB/" class="tag">
+                    android
+                  </a>
+                
+              </div>
+            
+            
+              <div class="next-post">
+                <div class="next">下一篇</div>
+                <a href="https://uniquexiong.github.io/post/an-zhuo-shang-chuan-duo-wen-jian-shi-xian/">
+                  <h3 class="post-title">
+                    安卓上传多文件实现
+                  </h3>
+                </a>
+              </div>
+            
+
+            
+              
+                <div id="gitalk-container" data-aos="fade-in"></div>
+              
+
+              
+            
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script type="application/javascript">
+
+AOS.init();
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+  <script src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.5.1/build/highlight.min.js"></script>
+  <script>
+    hljs.initHighlightingOnLoad()
+  </script>
+
+
+
+
+  
+    <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+    <script>
+
+      var gitalk = new Gitalk({
+        clientID: 'ea4c48a44bccc4e3c308',
+        clientSecret: 'a9dc8831abca7bd27ba7704907f629b5a2d39745',
+        repo: 'UNIQUEXIONG.github.io',
+        owner: 'UNIQUEXIONG',
+        admin: ['UNIQUEXIONG'],
+        id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+        distractionFreeMode: false  // Facebook-like distraction free mode
+      })
+
+      gitalk.render('gitalk-container')
+
+    </script>
+  
+
+  
+
+
+
+
+  </body>
+</html>

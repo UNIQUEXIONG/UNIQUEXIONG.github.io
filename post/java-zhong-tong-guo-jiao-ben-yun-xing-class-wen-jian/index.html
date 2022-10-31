@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" >
+
+<title>java中通过脚本运行.class文件 | 熊熊&#39;s blog</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://uniquexiong.github.io/favicon.ico?v=1667208540424">
+<link rel="stylesheet" href="https://uniquexiong.github.io/styles/main.css">
+
+
+  
+    <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css" />
+  
+
+  
+
+
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+
+
+    <meta name="description" content="​
+如图为我的项目构成
+
+首先用记事本创建一个.txt文件，然后写入如下内容
+
+我接下来解释其中的每一句话的意思
+set JAVA_HOME=D:\Users\10072\Downloads\jdk-17.0.1
+set PROJECT_H..." />
+    <meta name="keywords" content="技术,java" />
+  </head>
+  <body>
+    <div id="app" class="main">
+
+      <div class="sidebar" :class="{ 'full-height': menuVisible }">
+  <div class="top-container" data-aos="fade-right">
+    <div class="top-header-container">
+      <a class="site-title-container" href="https://uniquexiong.github.io">
+        <img src="https://uniquexiong.github.io/images/avatar.png?v=1667208540424" class="site-logo">
+        <h1 class="site-title">熊熊&#39;s blog</h1>
+      </a>
+      <div class="menu-btn" @click="menuVisible = !menuVisible">
+        <div class="line"></div>
+      </div>
+    </div>
+    <div>
+      
+        
+          <a href="/" class="site-nav">
+            首页
+          </a>
+        
+      
+        
+          <a href="/archives" class="site-nav">
+            归档
+          </a>
+        
+      
+        
+          <a href="/tags" class="site-nav">
+            标签
+          </a>
+        
+      
+        
+          <a href="/post/about" class="site-nav">
+            关于
+          </a>
+        
+      
+    </div>
+  </div>
+  <div class="bottom-container" data-aos="flip-up" data-aos-offset="0">
+    <div class="social-container">
+      
+        
+          <a class="social-link" href="https://github.com/UNIQUEXIONG" target="_blank">
+            <i class="fab fa-github"></i>
+          </a>
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+    <div class="site-description">
+      熊熊的博客
+    </div>
+    <div class="site-footer">
+      Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://uniquexiong.github.io/atom.xml" target="_blank">RSS</a>
+    </div>
+  </div>
+</div>
+
+
+      <div class="main-container">
+        <div class="content-container" data-aos="fade-up">
+          <div class="post-detail">
+            <h2 class="post-title">java中通过脚本运行.class文件</h2>
+            <div class="post-date">2022-10-04</div>
+            
+            <div class="post-content" v-pre>
+              <p>​<br>
+如图为我的项目构成<br>
+<img src="https://uniquexiong.github.io/post-images/1664872772528.png" alt="" loading="lazy"><br>
+首先用记事本创建一个.txt文件，然后写入如下内容<br>
+<img src="https://uniquexiong.github.io/post-images/1664872827223.png" alt="" loading="lazy"><br>
+我接下来解释其中的每一句话的意思</p>
+<pre><code>set JAVA_HOME=D:\Users\10072\Downloads\jdk-17.0.1
+set PROJECT_HOME=D:\Users\10072\Downloads\作业1\第1章作业\第1章作业\chapter1
+set path=%path%;%JAVA_HOME%\bin
+set classpath=%classpath%;%PROJECT_HOME%\class
+//第一句设置JAVA_HOME的环境变量，后面的地址是你下载的jdk的路径
+
+//第二句设置PROJECT_HOME环境变量，后面的地址是你项目的地址，参考我项目的位置
+
+//第三句添加JAVA_HOME中的bin文件夹到环境变量中，jdk自带bin文件夹
+
+//将PROJECT_HOME的class文件夹添加到环境变量中，这个class是文件的最顶级文件夹，其下的第一个文件夹就是包文件夹了，请参考我的项目构成
+</code></pre>
+<p>然后将这个.txt文件夹的后缀改成.bat，然后将这个文件夹拖到项目里面 ，随便哪里都行，我拖到了chapter文件夹的一级子目录下面，请看我的第一张图。</p>
+<p>接着右击.bat文件，寻找run cmd script,如果没有，请在IntelliJ中下载cmd插件，如图所示：首先按Shift+Ctrl+A，在弹出来的窗口中搜“插件”（英文版搜plugins），然后在Marplace中搜索CMD Support，安装之后重启idea。<br>
+<img src="https://uniquexiong.github.io/post-images/1664872856303.png" alt="" loading="lazy"><br>
+ 安装完之后，右击.bat文件，点击run cmd script你就会获得如图所示的界面<br>
+<img src="https://uniquexiong.github.io/post-images/1664872869203.png" alt="" loading="lazy"><br>
+输入如下内容即可</p>
+<pre><code>java -classpath %classpath% homework/ch1/Welcome
+</code></pre>
+<p>其中%classpath%后面的路径是你的包名+类名（请参考我的项目构成）</p>
+<p>然后回车，就成功啦</p>
+<figure data-type="image" tabindex="1"><img src="https://uniquexiong.github.io/post-images/1664872899405.png" alt="" loading="lazy"></figure>
+<p>** 创作不易，求支持**<br>
+​</p>
+
+            </div>
+            
+              <div class="tag-container">
+                
+                  <a href="https://uniquexiong.github.io/tag/StzcOYYcV/" class="tag">
+                    技术
+                  </a>
+                
+                  <a href="https://uniquexiong.github.io/tag/g_qe6_T-i/" class="tag">
+                    java
+                  </a>
+                
+              </div>
+            
+            
+              <div class="next-post">
+                <div class="next">下一篇</div>
+                <a href="https://uniquexiong.github.io/post/xiao-cheng-xu-su-cai-shou-ji/">
+                  <h3 class="post-title">
+                    小程序素材收集
+                  </h3>
+                </a>
+              </div>
+            
+
+            
+              
+                <div id="gitalk-container" data-aos="fade-in"></div>
+              
+
+              
+            
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script type="application/javascript">
+
+AOS.init();
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+  <script src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.5.1/build/highlight.min.js"></script>
+  <script>
+    hljs.initHighlightingOnLoad()
+  </script>
+
+
+
+
+  
+    <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+    <script>
+
+      var gitalk = new Gitalk({
+        clientID: 'ea4c48a44bccc4e3c308',
+        clientSecret: 'a9dc8831abca7bd27ba7704907f629b5a2d39745',
+        repo: 'UNIQUEXIONG.github.io',
+        owner: 'UNIQUEXIONG',
+        admin: ['UNIQUEXIONG'],
+        id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+        distractionFreeMode: false  // Facebook-like distraction free mode
+      })
+
+      gitalk.render('gitalk-container')
+
+    </script>
+  
+
+  
+
+
+
+
+  </body>
+</html>

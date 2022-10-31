@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" >
+
+<title>okhttp四种请求操作 | 熊熊&#39;s blog</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://uniquexiong.github.io/favicon.ico?v=1667208540424">
+<link rel="stylesheet" href="https://uniquexiong.github.io/styles/main.css">
+
+
+  
+    <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css" />
+  
+
+  
+
+
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+
+
+    <meta name="description" content="
+首先创建请求器
+
+    private OkHttpClient okHttpClient;//请求器
+    @Override
+    protected void onCreate(Bundle savedInstanceStat..." />
+    <meta name="keywords" content="技术,android" />
+  </head>
+  <body>
+    <div id="app" class="main">
+
+      <div class="sidebar" :class="{ 'full-height': menuVisible }">
+  <div class="top-container" data-aos="fade-right">
+    <div class="top-header-container">
+      <a class="site-title-container" href="https://uniquexiong.github.io">
+        <img src="https://uniquexiong.github.io/images/avatar.png?v=1667208540424" class="site-logo">
+        <h1 class="site-title">熊熊&#39;s blog</h1>
+      </a>
+      <div class="menu-btn" @click="menuVisible = !menuVisible">
+        <div class="line"></div>
+      </div>
+    </div>
+    <div>
+      
+        
+          <a href="/" class="site-nav">
+            首页
+          </a>
+        
+      
+        
+          <a href="/archives" class="site-nav">
+            归档
+          </a>
+        
+      
+        
+          <a href="/tags" class="site-nav">
+            标签
+          </a>
+        
+      
+        
+          <a href="/post/about" class="site-nav">
+            关于
+          </a>
+        
+      
+    </div>
+  </div>
+  <div class="bottom-container" data-aos="flip-up" data-aos-offset="0">
+    <div class="social-container">
+      
+        
+          <a class="social-link" href="https://github.com/UNIQUEXIONG" target="_blank">
+            <i class="fab fa-github"></i>
+          </a>
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+    <div class="site-description">
+      熊熊的博客
+    </div>
+    <div class="site-footer">
+      Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://uniquexiong.github.io/atom.xml" target="_blank">RSS</a>
+    </div>
+  </div>
+</div>
+
+
+      <div class="main-container">
+        <div class="content-container" data-aos="fade-up">
+          <div class="post-detail">
+            <h2 class="post-title">okhttp四种请求操作</h2>
+            <div class="post-date">2022-10-04</div>
+            
+            <div class="post-content" v-pre>
+              <ul>
+<li>首先创建请求器</li>
+</ul>
+<pre><code>    private OkHttpClient okHttpClient;//请求器
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        okHttpClient = new OkHttpClient();
+    }
+</code></pre>
+<ul>
+<li>同步get</li>
+</ul>
+<pre><code>public void upload(View view) {
+        new Thread() {//必须创建一个新的线程
+            @Override
+            public void run() {
+                Request request = new Request.Builder().url(&quot;https://www.httpbin.org/get?a=1&amp;b=2&quot;).build();
+                //创建一个请求好的call对象
+                Call call = okHttpClient.newCall(request);
+                try {
+                    Response response = call.execute();
+                    Log.i(TAG, &quot;message &quot; + response.body().string());
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }.start();
+    }
+</code></pre>
+<ul>
+<li>异步get</li>
+</ul>
+<pre><code>//异步不需要启动线程
+//因为okhttp内部会创建子线程
+public void upload1(View view) {
+        Request request = new Request.Builder().url(&quot;https://www.httpbin.org/get?a=1&amp;b=2&quot;).build();
+        //创建一个请求好的call对象
+        Call call = okHttpClient.newCall(request);
+        //异步请求需要传递一个回调方法给enqueue方法
+        call.enqueue(new Callback() {
+            //请求错误的方法
+            @Override
+            public void onFailure(@NonNull Call call, @NonNull IOException e) {
+
+            }
+            //请求结束的方法
+            并不代表请求成功，只是和服务器的对话结束
+            @Override
+            public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
+                if (response.isSuccessful()) {
+                    Log.i(TAG, &quot;onResponse: &quot;+response.body().string());
+                }
+            }
+        });
+    }
+</code></pre>
+<ul>
+<li>同步post</li>
+</ul>
+<pre><code>//同步要创建新的线程
+public void upload2(View view) {
+        new Thread() {
+            @Override
+            public void run() {
+                //创建一个表单，这个表单要放在request的post()中
+                FormBody formBody = new FormBody.Builder().add(&quot;a&quot;, &quot;1&quot;).add(&quot;b&quot;, &quot;2&quot;).build();
+//                下面如果没有写.post()就默认是get()方法
+                Request request = new Request.Builder().url(&quot;https://www.httpbin.org/post&quot;).post(formBody).build();
+                //创建一个请求好的call对象
+                Call call = okHttpClient.newCall(request);
+                try {
+                    Response response = call.execute();
+                    Log.i(TAG, &quot;onResponse &quot; + response.body().string());
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }.start();
+    }
+</code></pre>
+<ul>
+<li>异步post</li>
+</ul>
+<pre><code>public void upload3(View view) {
+        FormBody formBody = new FormBody.Builder().add(&quot;a&quot;, &quot;1&quot;).add(&quot;b&quot;, &quot;2&quot;).build();
+        Request request = new Request.Builder().url(&quot;https://www.httpbin.org/post&quot;).post(formBody).build();
+        //创建一个请求好的call对象
+        Call call = okHttpClient.newCall(request);
+        //和同步post的区别就是使用enqueue()函数
+        call.enqueue(new Callback() {
+            @Override
+            public void onFailure(@NonNull Call call, @NonNull IOException e) {
+
+            }
+
+            @Override
+            public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
+                if (response.isSuccessful()) {
+                    Log.i(TAG, &quot;onResponse: &quot;+response.body().string());
+                }
+            }
+        });
+    }
+</code></pre>
+
+            </div>
+            
+              <div class="tag-container">
+                
+                  <a href="https://uniquexiong.github.io/tag/StzcOYYcV/" class="tag">
+                    技术
+                  </a>
+                
+                  <a href="https://uniquexiong.github.io/tag/GMlxh_gtB/" class="tag">
+                    android
+                  </a>
+                
+              </div>
+            
+            
+              <div class="next-post">
+                <div class="next">下一篇</div>
+                <a href="https://uniquexiong.github.io/post/java-zhong-tong-guo-jiao-ben-yun-xing-class-wen-jian/">
+                  <h3 class="post-title">
+                    java中通过脚本运行.class文件
+                  </h3>
+                </a>
+              </div>
+            
+
+            
+              
+                <div id="gitalk-container" data-aos="fade-in"></div>
+              
+
+              
+            
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script type="application/javascript">
+
+AOS.init();
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+  <script src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.5.1/build/highlight.min.js"></script>
+  <script>
+    hljs.initHighlightingOnLoad()
+  </script>
+
+
+
+
+  
+    <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+    <script>
+
+      var gitalk = new Gitalk({
+        clientID: 'ea4c48a44bccc4e3c308',
+        clientSecret: 'a9dc8831abca7bd27ba7704907f629b5a2d39745',
+        repo: 'UNIQUEXIONG.github.io',
+        owner: 'UNIQUEXIONG',
+        admin: ['UNIQUEXIONG'],
+        id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+        distractionFreeMode: false  // Facebook-like distraction free mode
+      })
+
+      gitalk.render('gitalk-container')
+
+    </script>
+  
+
+  
+
+
+
+
+  </body>
+</html>

@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" >
+
+<title>okhttp POST请求数据格式 | 熊熊&#39;s blog</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://uniquexiong.github.io/favicon.ico?v=1667208540424">
+<link rel="stylesheet" href="https://uniquexiong.github.io/styles/main.css">
+
+
+  
+    <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css" />
+  
+
+  
+
+
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+
+
+    <meta name="description" content="所有POST请求的数据格式如下
+https:www.runoob.com/http/http-content-type.html
+
+Content-Type: application/x-www-form-urlencoded
+
+
+数据编码..." />
+    <meta name="keywords" content="技术,android" />
+  </head>
+  <body>
+    <div id="app" class="main">
+
+      <div class="sidebar" :class="{ 'full-height': menuVisible }">
+  <div class="top-container" data-aos="fade-right">
+    <div class="top-header-container">
+      <a class="site-title-container" href="https://uniquexiong.github.io">
+        <img src="https://uniquexiong.github.io/images/avatar.png?v=1667208540424" class="site-logo">
+        <h1 class="site-title">熊熊&#39;s blog</h1>
+      </a>
+      <div class="menu-btn" @click="menuVisible = !menuVisible">
+        <div class="line"></div>
+      </div>
+    </div>
+    <div>
+      
+        
+          <a href="/" class="site-nav">
+            首页
+          </a>
+        
+      
+        
+          <a href="/archives" class="site-nav">
+            归档
+          </a>
+        
+      
+        
+          <a href="/tags" class="site-nav">
+            标签
+          </a>
+        
+      
+        
+          <a href="/post/about" class="site-nav">
+            关于
+          </a>
+        
+      
+    </div>
+  </div>
+  <div class="bottom-container" data-aos="flip-up" data-aos-offset="0">
+    <div class="social-container">
+      
+        
+          <a class="social-link" href="https://github.com/UNIQUEXIONG" target="_blank">
+            <i class="fab fa-github"></i>
+          </a>
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+    <div class="site-description">
+      熊熊的博客
+    </div>
+    <div class="site-footer">
+      Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://uniquexiong.github.io/atom.xml" target="_blank">RSS</a>
+    </div>
+  </div>
+</div>
+
+
+      <div class="main-container">
+        <div class="content-container" data-aos="fade-up">
+          <div class="post-detail">
+            <h2 class="post-title">okhttp POST请求数据格式</h2>
+            <div class="post-date">2022-10-04</div>
+            
+            <div class="post-content" v-pre>
+              <p>所有POST请求的数据格式如下<br>
+<a href="https:www.runoob.com/http/http-content-type.html">https:www.runoob.com/http/http-content-type.html</a></p>
+<ul>
+<li>Content-Type: application/x-www-form-urlencoded</li>
+</ul>
+<blockquote>
+<p>数据编码为： 名称/值对 为默认形式</p>
+</blockquote>
+<ul>
+<li>Content-Type: multipart/form-data</li>
+</ul>
+<blockquote>
+<p>数据被编码为一条消息，一般用于文件上传，可以用来提交多个文件</p>
+</blockquote>
+<ul>
+<li>Content-Type: application/octet-stream</li>
+</ul>
+<blockquote>
+<p>提交二进制数据，如果用于文件上传，只能上传一个文件</p>
+</blockquote>
+<ul>
+<li>Content-Type: application/json</li>
+</ul>
+<blockquote>
+<p>提交json数据</p>
+</blockquote>
+
+            </div>
+            
+              <div class="tag-container">
+                
+                  <a href="https://uniquexiong.github.io/tag/StzcOYYcV/" class="tag">
+                    技术
+                  </a>
+                
+                  <a href="https://uniquexiong.github.io/tag/GMlxh_gtB/" class="tag">
+                    android
+                  </a>
+                
+              </div>
+            
+            
+              <div class="next-post">
+                <div class="next">下一篇</div>
+                <a href="https://uniquexiong.github.io/post/okhttp-si-chong-qing-qiu-cao-zuo/">
+                  <h3 class="post-title">
+                    okhttp四种请求操作
+                  </h3>
+                </a>
+              </div>
+            
+
+            
+              
+                <div id="gitalk-container" data-aos="fade-in"></div>
+              
+
+              
+            
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script type="application/javascript">
+
+AOS.init();
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+  <script src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.5.1/build/highlight.min.js"></script>
+  <script>
+    hljs.initHighlightingOnLoad()
+  </script>
+
+
+
+
+  
+    <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+    <script>
+
+      var gitalk = new Gitalk({
+        clientID: 'ea4c48a44bccc4e3c308',
+        clientSecret: 'a9dc8831abca7bd27ba7704907f629b5a2d39745',
+        repo: 'UNIQUEXIONG.github.io',
+        owner: 'UNIQUEXIONG',
+        admin: ['UNIQUEXIONG'],
+        id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+        distractionFreeMode: false  // Facebook-like distraction free mode
+      })
+
+      gitalk.render('gitalk-container')
+
+    </script>
+  
+
+  
+
+
+
+
+  </body>
+</html>

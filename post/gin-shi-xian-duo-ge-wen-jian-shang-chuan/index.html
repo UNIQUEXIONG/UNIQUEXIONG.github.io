@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" >
+
+<title>Gin实现多个文件上传 | 熊熊&#39;s blog</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://uniquexiong.github.io/favicon.ico?v=1667208540424">
+<link rel="stylesheet" href="https://uniquexiong.github.io/styles/main.css">
+
+
+  
+    <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css" />
+  
+
+  
+
+
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+
+
+    <meta name="description" content="func AddDynamic(c *gin.Context) {
+	form, err := c.MultipartForm()
+	if err != nil {
+		c.String(http.StatusBadRequest, fmt..." />
+    <meta name="keywords" content="技术,Golang" />
+  </head>
+  <body>
+    <div id="app" class="main">
+
+      <div class="sidebar" :class="{ 'full-height': menuVisible }">
+  <div class="top-container" data-aos="fade-right">
+    <div class="top-header-container">
+      <a class="site-title-container" href="https://uniquexiong.github.io">
+        <img src="https://uniquexiong.github.io/images/avatar.png?v=1667208540424" class="site-logo">
+        <h1 class="site-title">熊熊&#39;s blog</h1>
+      </a>
+      <div class="menu-btn" @click="menuVisible = !menuVisible">
+        <div class="line"></div>
+      </div>
+    </div>
+    <div>
+      
+        
+          <a href="/" class="site-nav">
+            首页
+          </a>
+        
+      
+        
+          <a href="/archives" class="site-nav">
+            归档
+          </a>
+        
+      
+        
+          <a href="/tags" class="site-nav">
+            标签
+          </a>
+        
+      
+        
+          <a href="/post/about" class="site-nav">
+            关于
+          </a>
+        
+      
+    </div>
+  </div>
+  <div class="bottom-container" data-aos="flip-up" data-aos-offset="0">
+    <div class="social-container">
+      
+        
+          <a class="social-link" href="https://github.com/UNIQUEXIONG" target="_blank">
+            <i class="fab fa-github"></i>
+          </a>
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+    <div class="site-description">
+      熊熊的博客
+    </div>
+    <div class="site-footer">
+      Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://uniquexiong.github.io/atom.xml" target="_blank">RSS</a>
+    </div>
+  </div>
+</div>
+
+
+      <div class="main-container">
+        <div class="content-container" data-aos="fade-up">
+          <div class="post-detail">
+            <h2 class="post-title">Gin实现多个文件上传</h2>
+            <div class="post-date">2022-10-05</div>
+            
+            <div class="post-content" v-pre>
+              <pre><code>func AddDynamic(c *gin.Context) {
+	form, err := c.MultipartForm()
+	if err != nil {
+		c.String(http.StatusBadRequest, fmt.Sprintf(&quot;get err %s&quot;, err.Error()))
+	}
+	// 获取所有图片
+	files := form.File[&quot;files&quot;]
+	// 遍历所有图片
+	for _, file := range files {
+		// 逐个保存
+
+		myHash := md5.New()
+		//接下来进行hash，将文件路径转化成一连续字符串，作为储存文件名
+		storeName := file.Filename        //只是文件的原始文件名，接下来要将该字符串进行hash
+		fileSuffix := path.Ext(storeName) //获取后缀
+		timeString := string(time.Now().Unix())  //获取一个时间戳
+		goToHash := timeString + storeName       //前缀名加时间戳组成的字符串送去hash
+		n, err := myHash.Write([]byte(goToHash)) //将前缀写入hash中
+		if err != nil {                          //其中的n是写入的字符的数量
+			c.JSON(http.StatusInternalServerError, gin.H{
+				&quot;msg&quot;: &quot;后台散列处理失败&quot;,
+				&quot;num&quot;: n,
+			})
+			return
+		}
+		bytes := myHash.Sum([]byte(&quot;&quot;))    //获取散列之后的值
+		Prefix := fmt.Sprintf(&quot;%x&quot;, bytes) //储存文件的前缀
+		out, err2 := os.Create(&quot;resources/&quot; + Prefix + fileSuffix)
+		defer out.Close()
+		if err2 != nil {
+			c.JSON(http.StatusBadRequest, gin.H{
+				&quot;msg&quot;: &quot;后台文件储存失败&quot;, //文件储存失败
+			})
+			return
+		}
+		//接下来将文件对应关系储存在数据库中
+		var image model.Image
+		image.Url = Prefix + fileSuffix
+
+		if err := c.SaveUploadedFile(file, model.AppBase+image.Url); err != nil {
+			c.String(http.StatusBadRequest, fmt.Sprintf(&quot;upload err %s&quot;, err.Error()))
+			return
+		}
+	}
+	c.JSON(http.StatusOK, gin.H{
+		&quot;code&quot;: 200,
+		&quot;msg&quot;:  &quot;ok&quot;,
+		&quot;data&quot;: fmt.Sprintf(&quot;upload ok %d files&quot;, len(files)),
+	})
+}
+</code></pre>
+
+            </div>
+            
+              <div class="tag-container">
+                
+                  <a href="https://uniquexiong.github.io/tag/StzcOYYcV/" class="tag">
+                    技术
+                  </a>
+                
+                  <a href="https://uniquexiong.github.io/tag/dGCBqmGD9/" class="tag">
+                    Golang
+                  </a>
+                
+              </div>
+            
+            
+              <div class="next-post">
+                <div class="next">下一篇</div>
+                <a href="https://uniquexiong.github.io/post/okhttp-post-qing-qiu-shu-ju-ge-shi/">
+                  <h3 class="post-title">
+                    okhttp POST请求数据格式
+                  </h3>
+                </a>
+              </div>
+            
+
+            
+              
+                <div id="gitalk-container" data-aos="fade-in"></div>
+              
+
+              
+            
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script type="application/javascript">
+
+AOS.init();
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+  <script src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.5.1/build/highlight.min.js"></script>
+  <script>
+    hljs.initHighlightingOnLoad()
+  </script>
+
+
+
+
+  
+    <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+    <script>
+
+      var gitalk = new Gitalk({
+        clientID: 'ea4c48a44bccc4e3c308',
+        clientSecret: 'a9dc8831abca7bd27ba7704907f629b5a2d39745',
+        repo: 'UNIQUEXIONG.github.io',
+        owner: 'UNIQUEXIONG',
+        admin: ['UNIQUEXIONG'],
+        id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+        distractionFreeMode: false  // Facebook-like distraction free mode
+      })
+
+      gitalk.render('gitalk-container')
+
+    </script>
+  
+
+  
+
+
+
+
+  </body>
+</html>
