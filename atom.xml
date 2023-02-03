@@ -1,0 +1,569 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <id>https://uniquexiong.github.io</id>
+    <title>熊熊&apos;s blog</title>
+    <updated>2023-02-03T15:40:02.907Z</updated>
+    <generator>https://github.com/jpmonette/feed</generator>
+    <link rel="alternate" href="https://uniquexiong.github.io"/>
+    <link rel="self" href="https://uniquexiong.github.io/atom.xml"/>
+    <subtitle>不忘初心，脚踏实地</subtitle>
+    <logo>https://uniquexiong.github.io/images/avatar.png</logo>
+    <icon>https://uniquexiong.github.io/favicon.ico</icon>
+    <rights>All rights reserved 2023, 熊熊&apos;s blog</rights>
+    <entry>
+        <title type="html"><![CDATA[gridea配置教程]]></title>
+        <id>https://uniquexiong.github.io/post/gridea-pei-zhi-jiao-cheng/</id>
+        <link href="https://uniquexiong.github.io/post/gridea-pei-zhi-jiao-cheng/">
+        </link>
+        <updated>2023-02-01T08:57:54.000Z</updated>
+        <content type="html"><![CDATA[<h1 id="gridea配置教程">Gridea配置教程</h1>
+<p>最近很多小伙伴问我博客的配置问题哈，那我来简单的说一下哈：</p>
+<h2 id="一-准备工作">一、准备工作</h2>
+<p><em><strong>如果准备工作没有完成后面的就完成不了了</strong></em></p>
+<ol>
+<li>首先学会科学上网，能够科学上网</li>
+<li>拥有一个github账号</li>
+<li>拥有解决问题的决心和不怕困难的勇气</li>
+</ol>
+<p><em>说明：建议非计算机专业的同学尝试其他方式，因为配置过程中会有很多踩坑，这些踩坑过程计算机的同学解决问题之后会有很大的专业知识上的提升，而非专业的同学可能未来用不到这些知识，所以建议采用其他方式记录博客，可以选择别的博客框架，或者使用qq空间朋友圈</em></p>
+<h2 id="二-配置教程">二、配置教程</h2>
+<p><a href="https://zhuanlan.zhihu.com/p/71681116">https://zhuanlan.zhihu.com/p/71681116</a></p>
+<h2 id="三-成品展示">三、成品展示</h2>
+<p><em>温馨提示： 科学上网，电脑展示更佳</em></p>
+<p>我的博客（uniquexiong）:<br>
+<a href="https://uniquexiong.github.io/">https://uniquexiong.github.io/</a></p>
+<p>我同学的博客（超级热心大佬！！！）:<br>
+<a href="https://2006wzt.github.io/">https://2006wzt.github.io/</a></p>
+<h2 id="四-问题实录windows系统">四、问题实录（windows系统）</h2>
+<p><em><strong>温馨提示：你可能会遇到各种各样的问题不在本文中有提及，如果放弃，之前的努力就白费了，但是努力查询相关错误也可能付出更多努力然后放弃。在网上搜索gridea的相关报错教程可以学到很多东西（对于计算机专业的同学，但是对于其他专业的同学就没有那么大必要了）</strong></em></p>
+<ol>
+<li>同步报错：</li>
+</ol>
+<blockquote>
+<p>同步遇到了错误，请查阅 FAQ 或 Issues 来寻找解决方案</p>
+</blockquote>
+<p>遇到这个问题有多方面因素，打开Gridea客户端，左上角“编辑”--&gt;“开发者工具”--&gt;&quot;console&quot;--&gt;“检测结果”，查看右边错误，如果错误提示是：</p>
+<blockquote>
+<p>ETIMEOUT 或 ECONNREST</p>
+</blockquote>
+<p>那么就是网络问题，请尝试使用如下方式进行解决：</p>
+<p>️ 找到能ping通的github的ip地址，网址如下：</p>
+<p><a href="https://ping.chinaz.com/github.com">https://ping.chinaz.com/github.com</a></p>
+<p>100多个站点，往下翻，找到延时少的（一般是国外ip），复制</p>
+<p>️ 进入该文件：</p>
+<blockquote>
+<p>C:\Windows\System32\drivers\etc\hosts</p>
+</blockquote>
+<p>在该文件末尾加上（另起一行）（如果要给管理员权限就用管理员模式打开）：</p>
+<blockquote>
+<p>140.82.121.3 github.com</p>
+</blockquote>
+<p><strong>注意！</strong>：这个140.82.121.3是你刚刚复制的ip地址，记得保存文件</p>
+<p>️ 同时按下 win+R，输入cmd回车，在终端输入 ipconfig/flushdns 。然后回车，之后出现该问题的频率就会大幅降低。</p>
+<ol start="2">
+<li>其他问题：</li>
+</ol>
+<p>如果出现其他问题可以google一下哦，博主无能为力了（难过）</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[golang生成linux执行文件并部署]]></title>
+        <id>https://uniquexiong.github.io/post/golang-sheng-cheng-linux-zhi-xing-wen-jian-bing-bu-shu/</id>
+        <link href="https://uniquexiong.github.io/post/golang-sheng-cheng-linux-zhi-xing-wen-jian-bing-bu-shu/">
+        </link>
+        <updated>2022-10-31T09:15:27.000Z</updated>
+        <content type="html"><![CDATA[<p><strong>以部署文件gobackend为例</strong></p>
+<ul>
+<li>进入main.go文件所在路径，打开cmd，输入如下命令</li>
+</ul>
+<pre><code>set CGO_ENABLED=0
+set GOOS=linux
+set GOARCH=amd64
+go build main.go
+</code></pre>
+<ul>
+<li>连接远程服务器，输入</li>
+</ul>
+<pre><code>ps aux |grep gobackend
+# 显示运行进程
+kill 32223
+# 杀掉正在运行的gobackend文件
+cd /
+ls
+chmod 777 gobackend
+# 给gobackend赋予权限
+</code></pre>
+<ul>
+<li>接下来在本地操作，打开cmd，输入以下命令</li>
+</ul>
+<pre><code>sftp root@120.xx.xxx.xxx
+# sftp 连接云服务器
+putD:/naughty/naughtyRear/main/main gobackend
+# 上传之前生成的main文件
+</code></pre>
+<ul>
+<li>再次进入远程服务器操作界面，输入</li>
+</ul>
+<pre><code>nohup ./gobackend
+# 运行
+</code></pre>
+<ul>
+<li>开一个新的云服务器窗口，输入</li>
+</ul>
+<pre><code>ps aux|grep gobackend
+</code></pre>
+<p>就能看见运行的进程了</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Gson序列化与反序列化]]></title>
+        <id>https://uniquexiong.github.io/post/gson-xu-lie-hua-yu-fan-xu-lie-hua/</id>
+        <link href="https://uniquexiong.github.io/post/gson-xu-lie-hua-yu-fan-xu-lie-hua/">
+        </link>
+        <updated>2022-10-09T03:36:43.000Z</updated>
+        <content type="html"><![CDATA[<ul>
+<li>首先添加依赖</li>
+</ul>
+<blockquote>
+<p>implementation ‘com.google.code.gson:gson:2.8.5’</p>
+</blockquote>
+<ul>
+<li>最新版本在这个网址上找 <a href="https://github.com/google/gson">https://github.com/google/gson</a></li>
+<li>两种序列化方式</li>
+</ul>
+<pre><code>fromJson()：实现反序列化
+toJson()： 实现序列化
+</code></pre>
+<h2 id="例子">例子</h2>
+<ol>
+<li>基本数据类型的反序列化</li>
+</ol>
+<pre><code>        Gson gson = new Gson();
+        int     a = gson.fromJson(&quot;1&quot;, int.class);
+        double  b = gson.fromJson(&quot;0.123&quot;, double.class);
+        boolean c = gson.fromJson(&quot;true&quot;, boolean.class);
+        String  d = gson.fromJson(&quot;String&quot;, String.class);
+</code></pre>
+<ol start="2">
+<li>基本数据类型的序列化</li>
+</ol>
+<pre><code>		Gson gson = new Gson();
+        String a = gson.toJson(100);
+        String b = gson.toJson(0.2334);
+        String c = gson.toJson(false);
+        String d = gson.toJson(&quot;abcdef&quot;);
+</code></pre>
+<ol start="3">
+<li>Array的反序列化</li>
+</ol>
+<pre><code>        String arayJson = &quot;['Android', 'Ios', 'Java', 'PHP']&quot;;
+        Gson gson = new Gson();
+        String[] nameArray = gson.fromJson(arayJson, String[].class);
+        Log.d(&quot;arrayJson&quot;, &quot;onCreateView: &quot; + nameArray);
+</code></pre>
+<ol start="4">
+<li>Array的序列化</li>
+</ol>
+<pre><code>		ArrayList&lt;String&gt; nameArray = new ArrayList&lt;&gt;();
+        nameArray.add(&quot;Android&quot;);
+        nameArray.add(&quot;Ios&quot;);
+        nameArray.add(&quot;Java&quot;);
+        nameArray.add(&quot;PHP&quot;);
+        Gson gson = new Gson();
+        String gsonString = gson.toJson(nameArray);
+</code></pre>
+<ol start="5">
+<li>List/Map的反序列化</li>
+</ol>
+<pre><code>		String listString = &quot;[{'userId' : '1',  'userName':'怕瓦落地'}, {'userId':'2','userName':'安娜'}]&quot;;
+        Gson gson = new Gson();
+        Type listType = new TypeToken&lt;ArrayList&lt;Map&lt;String,String&gt;&gt;&gt;(){}.getType();
+        List&lt;Map&lt;String, String&gt;&gt; list = gson.fromJson(listString, listType);
+</code></pre>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[安卓上传多文件实现]]></title>
+        <id>https://uniquexiong.github.io/post/an-zhuo-shang-chuan-duo-wen-jian-shi-xian/</id>
+        <link href="https://uniquexiong.github.io/post/an-zhuo-shang-chuan-duo-wen-jian-shi-xian/">
+        </link>
+        <updated>2022-10-06T07:56:26.000Z</updated>
+        <content type="html"><![CDATA[<pre><code>public void upload(View view) {
+//获取内容
+        editText_title = findViewById(R.id.dynamic_title);
+        editText_content = findViewById(R.id.dynamic_content);
+        String dynamic_title = editText_title.getText().toString();//获取了文章的标题和文章的内容
+        String dynamic_content = editText_content.getText().toString();
+
+//这个地方创建两个文件对象，供于等会上传
+//MultipartBody不仅可以上传文件，还可以同时上传字符串等参数
+        File file1 =new File(&quot;C:\\Users\\10072\\Desktop\\1.txt&quot;);
+        File file2 =new File(&quot;C:\\Users\\10072\\Desktop\\2.txt&quot;);
+        MultipartBody multipartBody = new MultipartBody.Builder()
+                .addFormDataPart(&quot;files&quot;, file1.getName(), RequestBody.create(file1, MediaType.parse(&quot;text/plain&quot;)))
+                .addFormDataPart(&quot;files&quot;, file1.getName(), RequestBody.create(file1, MediaType.parse(&quot;text/plain&quot;)))
+                .addFormDataPart(&quot;dynamic_title&quot;, &quot;今天真是美好的一天&quot;).build();
+
+        //到目前为止信息全部存在multipartBody之中了，然后交给request进行请求
+        Request request = new Request.Builder().url(&quot;https://www.httpbin.org/post&quot;).post(multipartBody).build();
+        //创建一个请求好的call对象
+        Call call = okHttpClient.newCall(request);
+        //和同步post的区别就是使用enqueue()函数
+        call.enqueue(new Callback() {
+            @Override
+            public void onFailure(@NonNull Call call, @NonNull IOException e) {
+
+            }
+
+            @Override
+            public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
+                if (response.isSuccessful()) {
+                    Log.i(TAG, &quot;onResponse: &quot;+response.body().string());
+                }
+            }
+        });
+    }
+</code></pre>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[陪qljj熬夜赶ddl]]></title>
+        <id>https://uniquexiong.github.io/post/pei-qljj-ao-ye-gan-ddl/</id>
+        <link href="https://uniquexiong.github.io/post/pei-qljj-ao-ye-gan-ddl/">
+        </link>
+        <updated>2022-10-05T16:49:26.000Z</updated>
+        <content type="html"><![CDATA[<p><strong>我好困啊！！！！！！！！！！！！！！！</strong><br>
+<strong>她怎么还没有写完呜呜呜呜呜。。。。。。。。。。。。。。。</strong><br>
+<img src="https://uniquexiong.github.io/post-images/1664988654894.png" alt="" loading="lazy"><br>
+<strong>然后还点了一杯6块的巨难喝的奶茶。yue。。。</strong><br>
+<img src="https://uniquexiong.github.io/post-images/1664988718528.png" alt="" loading="lazy"><br>
+<strong>不吹不黑，这是我喝过最难喝的奶茶，就像兑了水的稀饭加了一点燕麦</strong></p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Gin实现多个文件上传]]></title>
+        <id>https://uniquexiong.github.io/post/gin-shi-xian-duo-ge-wen-jian-shang-chuan/</id>
+        <link href="https://uniquexiong.github.io/post/gin-shi-xian-duo-ge-wen-jian-shang-chuan/">
+        </link>
+        <updated>2022-10-05T14:12:25.000Z</updated>
+        <content type="html"><![CDATA[<pre><code>func AddDynamic(c *gin.Context) {
+	form, err := c.MultipartForm()
+	if err != nil {
+		c.String(http.StatusBadRequest, fmt.Sprintf(&quot;get err %s&quot;, err.Error()))
+	}
+	// 获取所有图片
+	files := form.File[&quot;files&quot;]
+	// 遍历所有图片
+	for _, file := range files {
+		// 逐个保存
+
+		myHash := md5.New()
+		//接下来进行hash，将文件路径转化成一连续字符串，作为储存文件名
+		storeName := file.Filename        //只是文件的原始文件名，接下来要将该字符串进行hash
+		fileSuffix := path.Ext(storeName) //获取后缀
+		timeString := string(time.Now().Unix())  //获取一个时间戳
+		goToHash := timeString + storeName       //前缀名加时间戳组成的字符串送去hash
+		n, err := myHash.Write([]byte(goToHash)) //将前缀写入hash中
+		if err != nil {                          //其中的n是写入的字符的数量
+			c.JSON(http.StatusInternalServerError, gin.H{
+				&quot;msg&quot;: &quot;后台散列处理失败&quot;,
+				&quot;num&quot;: n,
+			})
+			return
+		}
+		bytes := myHash.Sum([]byte(&quot;&quot;))    //获取散列之后的值
+		Prefix := fmt.Sprintf(&quot;%x&quot;, bytes) //储存文件的前缀
+		out, err2 := os.Create(&quot;resources/&quot; + Prefix + fileSuffix)
+		defer out.Close()
+		if err2 != nil {
+			c.JSON(http.StatusBadRequest, gin.H{
+				&quot;msg&quot;: &quot;后台文件储存失败&quot;, //文件储存失败
+			})
+			return
+		}
+		//接下来将文件对应关系储存在数据库中
+		var image model.Image
+		image.Url = Prefix + fileSuffix
+
+		if err := c.SaveUploadedFile(file, model.AppBase+image.Url); err != nil {
+			c.String(http.StatusBadRequest, fmt.Sprintf(&quot;upload err %s&quot;, err.Error()))
+			return
+		}
+	}
+	c.JSON(http.StatusOK, gin.H{
+		&quot;code&quot;: 200,
+		&quot;msg&quot;:  &quot;ok&quot;,
+		&quot;data&quot;: fmt.Sprintf(&quot;upload ok %d files&quot;, len(files)),
+	})
+}
+</code></pre>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[okhttp POST请求数据格式]]></title>
+        <id>https://uniquexiong.github.io/post/okhttp-post-qing-qiu-shu-ju-ge-shi/</id>
+        <link href="https://uniquexiong.github.io/post/okhttp-post-qing-qiu-shu-ju-ge-shi/">
+        </link>
+        <updated>2022-10-04T12:25:47.000Z</updated>
+        <content type="html"><![CDATA[<p>所有POST请求的数据格式如下<br>
+<a href="https:www.runoob.com/http/http-content-type.html">https:www.runoob.com/http/http-content-type.html</a></p>
+<ul>
+<li>Content-Type: application/x-www-form-urlencoded</li>
+</ul>
+<blockquote>
+<p>数据编码为： 名称/值对 为默认形式</p>
+</blockquote>
+<ul>
+<li>Content-Type: multipart/form-data</li>
+</ul>
+<blockquote>
+<p>数据被编码为一条消息，一般用于文件上传，可以用来提交多个文件</p>
+</blockquote>
+<ul>
+<li>Content-Type: application/octet-stream</li>
+</ul>
+<blockquote>
+<p>提交二进制数据，如果用于文件上传，只能上传一个文件</p>
+</blockquote>
+<ul>
+<li>Content-Type: application/json</li>
+</ul>
+<blockquote>
+<p>提交json数据</p>
+</blockquote>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[okhttp四种请求操作]]></title>
+        <id>https://uniquexiong.github.io/post/okhttp-si-chong-qing-qiu-cao-zuo/</id>
+        <link href="https://uniquexiong.github.io/post/okhttp-si-chong-qing-qiu-cao-zuo/">
+        </link>
+        <updated>2022-10-04T11:43:20.000Z</updated>
+        <content type="html"><![CDATA[<ul>
+<li>首先创建请求器</li>
+</ul>
+<pre><code>    private OkHttpClient okHttpClient;//请求器
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        okHttpClient = new OkHttpClient();
+    }
+</code></pre>
+<ul>
+<li>同步get</li>
+</ul>
+<pre><code>public void upload(View view) {
+        new Thread() {//必须创建一个新的线程
+            @Override
+            public void run() {
+                Request request = new Request.Builder().url(&quot;https://www.httpbin.org/get?a=1&amp;b=2&quot;).build();
+                //创建一个请求好的call对象
+                Call call = okHttpClient.newCall(request);
+                try {
+                    Response response = call.execute();
+                    Log.i(TAG, &quot;message &quot; + response.body().string());
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }.start();
+    }
+</code></pre>
+<ul>
+<li>异步get</li>
+</ul>
+<pre><code>//异步不需要启动线程
+//因为okhttp内部会创建子线程
+public void upload1(View view) {
+        Request request = new Request.Builder().url(&quot;https://www.httpbin.org/get?a=1&amp;b=2&quot;).build();
+        //创建一个请求好的call对象
+        Call call = okHttpClient.newCall(request);
+        //异步请求需要传递一个回调方法给enqueue方法
+        call.enqueue(new Callback() {
+            //请求错误的方法
+            @Override
+            public void onFailure(@NonNull Call call, @NonNull IOException e) {
+
+            }
+            //请求结束的方法
+            并不代表请求成功，只是和服务器的对话结束
+            @Override
+            public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
+                if (response.isSuccessful()) {
+                    Log.i(TAG, &quot;onResponse: &quot;+response.body().string());
+                }
+            }
+        });
+    }
+</code></pre>
+<ul>
+<li>同步post</li>
+</ul>
+<pre><code>//同步要创建新的线程
+public void upload2(View view) {
+        new Thread() {
+            @Override
+            public void run() {
+                //创建一个表单，这个表单要放在request的post()中
+                FormBody formBody = new FormBody.Builder().add(&quot;a&quot;, &quot;1&quot;).add(&quot;b&quot;, &quot;2&quot;).build();
+//                下面如果没有写.post()就默认是get()方法
+                Request request = new Request.Builder().url(&quot;https://www.httpbin.org/post&quot;).post(formBody).build();
+                //创建一个请求好的call对象
+                Call call = okHttpClient.newCall(request);
+                try {
+                    Response response = call.execute();
+                    Log.i(TAG, &quot;onResponse &quot; + response.body().string());
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }.start();
+    }
+</code></pre>
+<ul>
+<li>异步post</li>
+</ul>
+<pre><code>public void upload3(View view) {
+        FormBody formBody = new FormBody.Builder().add(&quot;a&quot;, &quot;1&quot;).add(&quot;b&quot;, &quot;2&quot;).build();
+        Request request = new Request.Builder().url(&quot;https://www.httpbin.org/post&quot;).post(formBody).build();
+        //创建一个请求好的call对象
+        Call call = okHttpClient.newCall(request);
+        //和同步post的区别就是使用enqueue()函数
+        call.enqueue(new Callback() {
+            @Override
+            public void onFailure(@NonNull Call call, @NonNull IOException e) {
+
+            }
+
+            @Override
+            public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
+                if (response.isSuccessful()) {
+                    Log.i(TAG, &quot;onResponse: &quot;+response.body().string());
+                }
+            }
+        });
+    }
+</code></pre>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[java中通过脚本运行.class文件]]></title>
+        <id>https://uniquexiong.github.io/post/java-zhong-tong-guo-jiao-ben-yun-xing-class-wen-jian/</id>
+        <link href="https://uniquexiong.github.io/post/java-zhong-tong-guo-jiao-ben-yun-xing-class-wen-jian/">
+        </link>
+        <updated>2022-10-04T08:23:29.000Z</updated>
+        <content type="html"><![CDATA[<p>​<br>
+如图为我的项目构成<br>
+<img src="https://uniquexiong.github.io/post-images/1664872772528.png" alt="" loading="lazy"><br>
+首先用记事本创建一个.txt文件，然后写入如下内容<br>
+<img src="https://uniquexiong.github.io/post-images/1664872827223.png" alt="" loading="lazy"><br>
+我接下来解释其中的每一句话的意思</p>
+<pre><code>set JAVA_HOME=D:\Users\10072\Downloads\jdk-17.0.1
+set PROJECT_HOME=D:\Users\10072\Downloads\作业1\第1章作业\第1章作业\chapter1
+set path=%path%;%JAVA_HOME%\bin
+set classpath=%classpath%;%PROJECT_HOME%\class
+//第一句设置JAVA_HOME的环境变量，后面的地址是你下载的jdk的路径
+
+//第二句设置PROJECT_HOME环境变量，后面的地址是你项目的地址，参考我项目的位置
+
+//第三句添加JAVA_HOME中的bin文件夹到环境变量中，jdk自带bin文件夹
+
+//将PROJECT_HOME的class文件夹添加到环境变量中，这个class是文件的最顶级文件夹，其下的第一个文件夹就是包文件夹了，请参考我的项目构成
+</code></pre>
+<p>然后将这个.txt文件夹的后缀改成.bat，然后将这个文件夹拖到项目里面 ，随便哪里都行，我拖到了chapter文件夹的一级子目录下面，请看我的第一张图。</p>
+<p>接着右击.bat文件，寻找run cmd script,如果没有，请在IntelliJ中下载cmd插件，如图所示：首先按Shift+Ctrl+A，在弹出来的窗口中搜“插件”（英文版搜plugins），然后在Marplace中搜索CMD Support，安装之后重启idea。<br>
+<img src="https://uniquexiong.github.io/post-images/1664872856303.png" alt="" loading="lazy"><br>
+ 安装完之后，右击.bat文件，点击run cmd script你就会获得如图所示的界面<br>
+<img src="https://uniquexiong.github.io/post-images/1664872869203.png" alt="" loading="lazy"><br>
+输入如下内容即可</p>
+<pre><code>java -classpath %classpath% homework/ch1/Welcome
+</code></pre>
+<p>其中%classpath%后面的路径是你的包名+类名（请参考我的项目构成）</p>
+<p>然后回车，就成功啦</p>
+<figure data-type="image" tabindex="1"><img src="https://uniquexiong.github.io/post-images/1664872899405.png" alt="" loading="lazy"></figure>
+<p>** 创作不易，求支持**<br>
+​</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[小程序素材收集]]></title>
+        <id>https://uniquexiong.github.io/post/xiao-cheng-xu-su-cai-shou-ji/</id>
+        <link href="https://uniquexiong.github.io/post/xiao-cheng-xu-su-cai-shou-ji/">
+        </link>
+        <updated>2022-08-29T13:22:13.000Z</updated>
+        <content type="html"><![CDATA[<h2 id="重要网站收集">重要网站收集</h2>
+<ul>
+<li><a href="https://www.iconfont.cn/">图标收集网站</a></li>
+</ul>
+<h2 id="图片显示模式">图片显示模式</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">值</th>
+<th style="text-align:center">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">scaleToFill</td>
+<td style="text-align:center">缩放模式，不保持纵横比缩放图片，使图片的宽高完全拉伸至填满 image 元素</td>
+</tr>
+<tr>
+<td style="text-align:center">aspectFit</td>
+<td style="text-align:center">缩放模式，保持纵横比缩放图片，使图片的长边能完全显示出来。也就是说，可以完整地将图片显示出来</td>
+</tr>
+<tr>
+<td style="text-align:center">aspectFill</td>
+<td style="text-align:center">缩放模式，保持纵横比缩放图片，只保证图片的短边能完全显示出来。也就是说，图片通常只在水平或垂直方向是完整的，另一个方向将会发生截取</td>
+</tr>
+<tr>
+<td style="text-align:center">widthFix</td>
+<td style="text-align:center">缩放模式，宽度不变，高度自动变化，保持原图宽高比不变<em><strong>这个感觉用的多一些</strong></em></td>
+</tr>
+<tr>
+<td style="text-align:center">heightFix</td>
+<td style="text-align:center">缩放模式，高度不变，宽度自动变化，保持原图宽高比不变</td>
+</tr>
+<tr>
+<td style="text-align:center">top</td>
+<td style="text-align:center">裁剪模式，不缩放图片，只显示图片的顶部区域</td>
+</tr>
+<tr>
+<td style="text-align:center">bottom</td>
+<td style="text-align:center">裁剪模式，不缩放图片，只显示图片的底部区域</td>
+</tr>
+<tr>
+<td style="text-align:center">center</td>
+<td style="text-align:center">裁剪模式，不缩放图片，只显示图片的中间区域</td>
+</tr>
+<tr>
+<td style="text-align:center">left</td>
+<td style="text-align:center">裁剪模式，不缩放图片，只显示图片的左边区域</td>
+</tr>
+<tr>
+<td style="text-align:center">right</td>
+<td style="text-align:center">裁剪模式，不缩放图片，只显示图片的右边区域</td>
+</tr>
+<tr>
+<td style="text-align:center">top left</td>
+<td style="text-align:center">裁剪模式，不缩放图片，只显示图片的左上边区域</td>
+</tr>
+<tr>
+<td style="text-align:center">top right</td>
+<td style="text-align:center">裁剪模式，不缩放图片，只显示图片的右上边区域</td>
+</tr>
+<tr>
+<td style="text-align:center">bottom left</td>
+<td style="text-align:center">裁剪模式，不缩放图片，只显示图片的左下边区域</td>
+</tr>
+<tr>
+<td style="text-align:center">bottom right</td>
+<td style="text-align:center">裁剪模式，不缩放图片，只显示图片的右下边区域</td>
+</tr>
+</tbody>
+</table>
+]]></content>
+    </entry>
+</feed>
